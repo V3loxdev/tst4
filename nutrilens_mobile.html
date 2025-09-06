@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLens - Smart Nutrition Tracker</title>
+    <link rel="stylesheet" href="nutrilens_mobile.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Home Page -->
+        <div class="page active" id="homePage">
+            <div class="header">
+                <div class="logo"><img src="../PICTURES/nutrilens text.png" alt="NutriLens Logo" style="max-height: 40px; object-fit: contain;"></div>
+                <div class="tagline">Smart Nutrition Analysis</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card" onclick="showDetails('calories')">
+                    <svg class="progress-ring" width="80" height="80">
+                        <circle class="progress-circle" cx="40" cy="40" r="30"></circle>
+                        <circle class="progress-bar" cx="40" cy="40" r="30" id="calorieProgress"></circle>
+                    </svg>
+                    <div class="stat-number" id="calorieCount">1,847</div>
+                    <div class="stat-label">Calories Today</div>
+                </div>
+                <div class="stat-card" onclick="showDetails('goal')">
+                    <div class="stat-number" id="goalPercent">73%</div>
+                    <div class="stat-label">Daily Goal</div>
+                </div>
+                <div class="stat-card" onclick="showDetails('protein')">
+                    <div class="stat-number" id="proteinCount">142g</div>
+                    <div class="stat-label">Protein</div>
+                </div>
+                <div class="stat-card" onclick="showDetails('fat')">
+                    <div class="stat-number" id="fatCount">67g</div>
+                    <div class="stat-label">Fat</div>
+                </div>
+            </div>
+            
+            <div class="camera-section">
+                <img src="../PICTURES/Nutrilens logo.png" alt="Scan Food" class="camera-button" onclick="startScan()">
+                <div class="camera-text">Scan your food</div>
+            </div>
+            
+            <div class="recent-meals">
+                <h2 class="section-title">Recent Meals</h2>
+                <div id="mealsList"></div>
+            </div>
+        </div>
+        
+        <!-- Analytics Page -->
+        <div class="page" id="analyticsPage">
+            <div class="header">
+                <div class="logo">📊 Analytics</div>
+                <div class="tagline">Your nutrition insights</div>
+            </div>
+            
+            <div class="analytics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">7</div>
+                    <div class="metric-label">Day Streak</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">Goal Hit Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15</div>
+                    <div class="metric-label">Foods Scanned</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2.1k</div>
+                    <div class="metric-label">Avg Calories</div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Weekly Calorie Intake</div>
+                <div class="chart">📈 Interactive chart coming soon</div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Macronutrient Breakdown</div>
+                <div class="chart">🥧 Pie chart visualization</div>
+            </div>
+        </div>
+        
+        <!-- Goals Page -->
+        <div class="page" id="goalsPage">
+            <div class="header">
+                <div class="logo">🎯 Goals</div>
+                <div class="tagline">Track your progress</div>
+            </div>
+            
+            <div class="goal-card">
+                <div class="goal-header">
+                    <div class="goal-title">Daily Calories</div>
+                    <div class="goal-target">Target: 2500 kcal</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-fill" style="width: 73%"></div>
+                </div>
+                <div class="progress-text">1,847 / 2,500 kcal</div>
+            </div>
+            
+            <div class="goal-card">
+                <div class="goal-header">
+                    <div class="goal-title">Protein Intake</div>
+                    <div class="goal-target">Target: 150g</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-fill" style="width: 95%"></div>
+                </div>
+                <div class="progress-text">142 / 150g</div>
+            </div>
+            
+            <div class="goal-card">
+                <div class="goal-header">
+                    <div class="goal-title">Water Intake</div>
+                    <div class="goal-target">Target: 8 glasses</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-fill" style="width: 62%"></div>
+                </div>
+                <div class="progress-text">5 / 8 glasses</div>
+            </div>
+            
+            <div class="goal-card">
+                <div class="goal-header">
+                    <div class="goal-title">Weekly Weight Loss</div>
+                    <div class="goal-target">Target: -0.5kg</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-fill" style="width: 80%"></div>
+                </div>
+                <div class="progress-text">-0.4 / -0.5kg</div>
+            </div>
+        </div>
+        
+        <!-- Profile Page -->
+        <div class="page" id="profilePage">
+            <div class="header">
+                <div class="logo">👤 Profile</div>
+                <div class="tagline">Manage your account</div>
+            </div>
+            
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-name">Lance Tabara</div>
+                <div class="profile-stats">Member since March 2024</div>
+                <button class="btn btn-secondary logout-btn" onclick="logout()">Logout</button>
+            </div>
+            
+            <div class="settings-list">
+                <div class="setting-item" onclick="showSettings('personal')">
+                    <div class="setting-label">Personal Information</div>
+                    <div class="setting-icon">→</div>
+                </div>
+                <div class="setting-item" onclick="showSettings('goals')">
+                    <div class="setting-label">Daily Goals</div>
+                    <div class="setting-icon">→</div>
+                </div>
+                <div class="setting-item" onclick="showSettings('notifications')">
+                    <div class="setting-label">Notifications</div>
+                    <div class="setting-icon">→</div>
+                </div>
+                <div class="setting-item" onclick="showSettings('privacy')">
+                    <div class="setting-label">Privacy & Security</div>
+                    <div class="setting-icon">→</div>
+                </div>
+                <div class="setting-item" onclick="showSettings('help')">
+                    <div class="setting-label">Help & Support</div>
+                    <div class="setting-icon">→</div>
+                </div>
+                <div class="setting-item" onclick="showSettings('about')">
+                    <div class="setting-label">About NutriLens</div>
+                    <div class="setting-icon">→</div>
+                </div>
+                <div class="setting-item" onclick="logout()">
+                    <div class="setting-label">Logout</div>
+                    <div class="setting-icon">→</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-grid">
+                <div class="nav-item active" onclick="switchPage('home')">🏠</div>
+                <div class="nav-item" onclick="switchPage('analytics')">📊</div>
+                <div class="nav-item" onclick="switchPage('goals')">🎯</div>
+                <div class="nav-item" onclick="switchPage('profile')">👤</div>
+            </div>
+        </div>
+        
+        <!-- Floating Action Button -->
+        <button class="floating-add" onclick="quickAdd()">➕</button>
+        
+        <!-- Scan Overlay -->
+        <div class="scan-overlay" id="scanOverlay">
+            <div class="close-scan" onclick="closeScan()">✕</div>
+            <div class="scan-frame"></div>
+            <div class="scan-text">Point camera at your food</div>
+        </div>
+        
+        <!-- Modals -->
+        <div class="modal" id="detailModal">
+            <div class="modal-content">
+                <div class="modal-title" id="modalTitle">Nutrition Details</div>
+                <div class="modal-body" id="modalBody">Loading...</div>
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="closeModal()">Got it</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="addFoodModal">
+            <div class="modal-content">
+                <div class="modal-title">Add Food Manually</div>
+                <div class="modal-body">
+                    <form class="food-form" id="foodForm">
+                        <div class="form-group">
+                            <label class="form-label">Food Name</label>
+                            <input type="text" class="form-input" id="foodName" placeholder="e.g. Apple">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Calories</label>
+                            <input type="number" class="form-input" id="foodCalories" placeholder="e.g. 95">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Protein (g)</label>
+                            <input type="number" class="form-input" id="foodProtein" placeholder="e.g. 0.5">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Fat (g)</label>
+                            <input type="number" class="form-input" id="foodFat" placeholder="e.g. 0.3">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Carbs (g)</label>
+                            <input type="number" class="form-input" id="foodCarbs" placeholder="e.g. 25">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="addFood()">Add Food</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="scanResultModal">
+            <div class="modal-content">
+                <div class="modal-title">Food Detected! 🍕</div>
+                <div class="modal-body" id="scanResultBody">
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="font-size: 60px; margin-bottom: 10px;" id="detectedEmoji">🍕</div>
+                        <div style="font-size: 18px; font-weight: bold; margin-bottom: 15px;" id="detectedFood">Pepperoni Pizza</div>
+                        <div style="color: #666; margin-bottom: 20px;">Nutrition information per serving:</div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center;">
+                            <div>
+                                <div style="font-size: 20px; font-weight: bold; color: #4CAF50;" id="detectedCalories">285</div>
+                                <div style="font-size: 12px; color: #666;">Calories</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 20px; font-weight: bold; color: #4CAF50;" id="detectedProtein">12g</div>
+                                <div style="font-size: 12px; color: #666;">Protein</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 20px; font-weight: bold; color: #4CAF50;" id="detectedCarbs">36g</div>
+                                <div style="font-size: 12px; color: #666;">Carbs</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 20px; font-weight: bold; color: #4CAF50;" id="detectedFat">10g</div>
+                                <div style="font-size: 12px; color: #666;">Fat</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="confirmScanResult()">Add to Diary</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="nutrilens_mobile.js"></script>
+</body>
+</html>
