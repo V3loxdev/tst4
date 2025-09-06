@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NutriLens Login</title>
+    <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="../../PICTURES/nutrilens text.png" alt="NutriLens Logo" class="logo" />
+            <h1>Login to NutriLens</h1>
+        </div>
+        <form id="loginForm" class="login-form">
+            <div class="form-group">
+                <label for="username">Email or Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your email or username" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div class="signup-link">
+            <p>Don't have an account? <a href="#" id="signupLink">Sign up</a></p>
+        </div>
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+
+    <div class="signup-container" style="display:none;">
+        <div class="login-header">
+            <img src="../../PICTURES/nutrilens text.png" alt="NutriLens Logo" class="logo" />
+            <h1>Sign Up for NutriLens</h1>
+        </div>
+        <form id="signupForm" class="login-form">
+            <div class="form-group">
+                <label for="signupUsername">Username</label>
+                <input type="text" id="signupUsername" name="signupUsername" placeholder="Choose a username" required />
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" name="signupEmail" placeholder="Enter your email" required />
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="signupPassword" placeholder="Create a password" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a href="#" id="loginLink">Login</a></p>
+        </div>
+        <div id="signupErrorMessage" class="error-message"></div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
